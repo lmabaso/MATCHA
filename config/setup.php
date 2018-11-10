@@ -83,9 +83,25 @@ catch (PDOException $e)
 try
 {
 	$_db = DB::getInstance();
-	$sql = "CREATE TABLE interests (
+	$sql = "CREATE TABLE userinterests (
 		id int(11) not null AUTO_INCREMENT PRIMARY KEY,
 		user_id int(11) not null,
+		user_interests int(11) not null
+	);";
+	$_db->query($sql, array());
+	echo "Table userinterests create success --- ";
+}
+catch (PDOException $e)
+{
+	echo $e->getMessage();
+	$_db = null;
+}
+
+try
+{
+	$_db = DB::getInstance();
+	$sql = "CREATE TABLE interests (
+		id int(11) not null AUTO_INCREMENT PRIMARY KEY,
 		user_interests varchar(256) not null
 	);";
 	$_db->query($sql, array());
