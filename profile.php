@@ -60,8 +60,10 @@ if (Input::exists())
         }
         Redirect::to('profile.php');
     }
-    $stuff = DB::getInstance();
-    $res1 = $stuff->query('SELECT * FROM userinterests WHERE user_id=?', array($user->data()->user_id));
+   
+}
+$stuff = DB::getInstance();
+    $res1 = $stuff->query('SELECT * FROM profiles WHERE user_id=?', array($user->data()->user_id));
     if ($res1->results()[0]->user_gender === NULL || $res1->results()[0]->user_biography === NULL || $res1->results()[0]->user_sexual_pref === NULL)
     {
         $stuff->update('users', $user->data()->user_id, array('user_fisrt_login' => 1));
@@ -70,7 +72,6 @@ if (Input::exists())
     {
         $stuff->update('users', $user->data()->user_id, array('user_fisrt_login' => 0));
     }
-}
 ?>
 <section class="header5 cid-r8wXduSTYD mbr-fullscreen mbr-parallax-background" id="header5-9">
     <div class="mbr-overlay" style="opacity: 0.5; background-color: rgb(255, 127, 159);"></div>
