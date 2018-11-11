@@ -40,6 +40,7 @@ if ($user->isLoggedIn())
 	echo '								<li class="nav-item">';
 	echo '									<a class="nav-link disabled" href="logout.php">Logout</a>';
 	echo '								</li>';
+	echo '								<script src="js/gps.js"></script>';
 }
 echo '							</ul>';
 echo '						</div>';
