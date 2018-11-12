@@ -50,7 +50,9 @@ try
 		token varchar(256) null,
 		user_isvalidated boolean not null DEFAULT '0',
 		user_notification boolean not null DEFAULT '1',
-		user_fisrt_login boolean not null DEFAULT '1'
+		user_fisrt_login boolean not null DEFAULT '1',
+		user_pos_lon varchar(256) null,
+		user_pos_lat varchar(256) null
 		);";
 	$_db->query($sql, array());
 	echo "Table users create success --- ";
