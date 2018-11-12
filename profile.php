@@ -83,9 +83,14 @@ $stuff = DB::getInstance();
                     <h2>Profile</h2>
                     <h3><?php echo escape($user->data()->user_username) ?></h3>
                     <div class="container">
+                    <?php
+                    $res = $stuff->query('SELECT * FROM pictures WHERE user_id=?', array($user->data()->user_id));
+                    var_dump($res);
+                    ?>
                         <div class="row">
                             <div class="col">
                                 <img src="imgs/profile.png" class="img-fluid" alt="Responsive image">
+                                <a href="createpost.php">Add</a>
                             </div>
                         </div>
                         <div class="row">
