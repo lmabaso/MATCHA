@@ -85,26 +85,74 @@ $stuff = DB::getInstance();
                     <div class="container">
                     <?php
                     $res = $stuff->query('SELECT * FROM pictures WHERE user_id=?', array($user->data()->user_id));
-                    var_dump($res);
                     ?>
                         <div class="row">
                             <div class="col">
-                                <img src="imgs/profile.png" class="img-fluid" alt="Responsive image">
-                                <a href="createpost.php">Add</a>
+                            <?php
+                            if (count($res->results()) > 1)
+                            {
+                                echo '<img src="' . $res->results()[0]->pic_dir . '" class="img-fluid" alt="Responsive image">';
+                            }
+                            else 
+                            {
+                                echo '<img src="imgs/profile.png" class="img-fluid" alt="Responsive image">
+                                <a href="createpost.php"><i class="material-icons">add</i></a>';
+                            }
+                            ?>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col">
-                                <img src="imgs/profile.png" class="rounded float-left img-thumbnail"  alt="...">
+                            <?php
+                            if (count($res->results()) > 2)
+                            {
+                                echo '<img src="' . $res->results()[1]->pic_dir . '" class="rounded float-left img-thumbnail"  alt="...">';
+                            }
+                            else 
+                            {
+                                echo '<img src="imgs/profile.png" class="rounded float-left img-thumbnail"  alt="...">
+                                <a href="createpost.php"><i class="material-icons">add</i></a>';
+                            }
+                            ?>
                             </div>
                             <div class="col">
-                                <img src="imgs/profile.png" class="rounded float-left img-thumbnail" alt="...">
+                            <?php
+                            if (count($res->results()) > 3)
+                            {
+                                echo '<img src="' . $res->results()[2]->pic_dir . '" class="rounded float-left img-thumbnail"  alt="...">';
+                            }
+                            else 
+                            {
+                                echo '<img src="imgs/profile.png" class="rounded float-left img-thumbnail"  alt="...">
+                                <a href="createpost.php"><i class="material-icons">add</i></a>';
+                            }
+                            ?>
                             </div>
                             <div class="col">
-                                <img src="imgs/profile.png" class="rounded float-left img-thumbnail" alt="...">
+                            <?php
+                            if (count($res->results()) > 4)
+                            {
+                                echo '<img src="' . $res->results()[3]->pic_dir . '" class="rounded float-left img-thumbnail"  alt="...">';
+                            }
+                            else 
+                            {
+                                echo '<img src="imgs/profile.png" class="rounded float-left img-thumbnail"  alt="...">
+                                <a href="createpost.php"><i class="material-icons">add</i></a>';
+                            }
+                            ?>
                             </div>
                             <div class="col">
-                                <img src="imgs/profile.png" class="rounded float-left img-thumbnail" alt="...">
+                            <?php
+                            if (count($res->results()) > 5)
+                            {
+                                echo '<img src="' . $res->results()[4]->pic_dir . '" class="rounded float-left img-thumbnail"  alt="...">';
+                            }
+                            else 
+                            {
+                                echo '<img src="imgs/profile.png" class="rounded float-left img-thumbnail"  alt="...">
+                                <a href="createpost.php"><i class="material-icons">add</i></a>';
+                            }
+                            ?>
                             </div>
                         </div>
                     </div>
@@ -138,6 +186,7 @@ $stuff = DB::getInstance();
                         <input type="submit" class="btn btn-md" name="bio" value="update"><br/>
                     </div>
                     <br/>
+                </form>
                     <?php
                         $result = $profile->query('SELECT * FROM userinterests WHERE user_id=?', array($user->data()->user_id));
                         if (count($result->results()) == 0)
@@ -166,7 +215,7 @@ $stuff = DB::getInstance();
                             echo '</select>';
                     ?>
                     <div class="mbr-section-btn align-center">
-                        <input type="submit" class="btn btn-md" name="Add" value="Add_interest"><br/>
+                        <a href="#" id="add_interest" class="btn btn-md"><i class="material-icons">add</i></a>
                     </div>
                     <br/>
                     <p><a href="updateusername.php">Update Username</a></p>
@@ -176,11 +225,12 @@ $stuff = DB::getInstance();
                         <input type="submit" name="submit" class="btn btn-md btn-info display-4" value="<?php echo ($user->data()->user_notification == 1 ? "Don't get notifications" : "Get notificaations")  ?>"><br/>
                     </div>
                     <input type="hidden" name="token" value="<?php echo Token::generate(); ?> " >
-                </form>
+                
             </div>
         </div>
     </div>
 </section>
+<script src="js/profile.js"></script>
 <?php
 include_once 'footer.php';
 ?>
