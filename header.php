@@ -7,7 +7,7 @@ echo '	<html>';
 echo '		<head>';
 echo '		<meta charset="UTF-8">';	
 echo '		<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1">';	
-echo '		<link rel="shortcut icon" href="assets/images/logo2.png" type="image/x-icon">';
+echo '		<link rel="shortcut icon" href="assets/images/favicon.ico" type="image/x-icon">';
 echo '		<title>Matcha</title>';
 echo '		<link rel="stylesheet" href="css/bootstrap.min.css">';
 echo '		<link rel="stylesheet" href="css/bootstrap-grid.min.css">';
