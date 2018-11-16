@@ -7,7 +7,9 @@ var video = document.querySelector('#camera-stream'),
     download_photo_btn = document.querySelector('#save-photo'),
     error_message = document.querySelector('#error-message'),
     select_pic = document.querySelector('#upload-file-local'),
-    upload_pic = document.querySelector('#upload-pic');
+    add_interest_btn = document.querySelector('#add_interest'),
+    upload_pic = document.querySelector('#upload-pic'),
+    snap = ""; 
 
 navigator.getMedia =    navigator.getUserMedia ||
                         navigator.webkitGetUserMedia ||
@@ -54,7 +56,7 @@ upload_pic.addEventListener("click", function(e)
 take_photo_btn.addEventListener("click", function(e)
 {
   e.preventDefault();
-  var snap = takeSnapshot(); 
+  snap = takeSnapshot(); 
   image.setAttribute('src', snap);
   image.classList.add("visible");
   delete_photo_btn.classList.remove("disabled");
@@ -64,6 +66,18 @@ take_photo_btn.addEventListener("click", function(e)
   video.pause();
 });
 
+download_photo_btn.addEventListener('click', function(e)
+{
+    e.preventDefault()
+    $.ajax({
+        url: "ajax.php",
+        type: "POST",
+        data:  {upload: 'true', pic_id: snap, token: document.getElementById('token').value},
+        success: function (response) {        
+            alert("suceess")
+        }
+    });
+})
 
 delete_photo_btn.addEventListener("click", function(e)
 {
@@ -73,6 +87,19 @@ delete_photo_btn.addEventListener("click", function(e)
     delete_photo_btn.classList.add("disabled");
     download_photo_btn.classList.add("disabled");
     video.play();
+});
+
+add_interest_btn.addEventListener('click', function(e)
+{
+    e.preventDefault();
+    $.ajax({
+        url: "ajax.php",
+        type: "POST",
+        data:  {add_interest: 'true', interest: document.getElementById('interests').value},
+        success: function (response) {        
+            alert("suceessfully added")
+        }
+    });
 });
 
 function showVideo()
@@ -120,33 +147,12 @@ function hideUI(){
     error_message.classList.remove("visible");
 }
 
-// var video = document.getElementById('video');
 var canvas = document.querySelector('canvas');
 var ctx = canvas.getContext('2d');
-// var photo = document.getElementById('photo');
-// var tmp;
 var input = document.querySelector('input[type="file"]');
-
-// (function()
-// {
-//     navigator.getMedia =    navigator.getUserMedia ||
-//                             navigator.webkitGetUserMedia ||
-//                             navigator.mozGetUserMedia ||
-//                             navigator.mediaDevices.getUserMedia||
-//                             navigator.msGetUserMedia;
-//     navigator.getMedia({
-//         video: true,
-//         audio: false
-//     }, function(stream) {
-//         video.srcObject = stream;
-//         video.play();
-//     }, function (error) {
-
-//     });
 
 input.addEventListener('change', function(e){
     const reader = new FileReader();
-    canvas.style = "display:block";
     var img1 = new Image();
     var width = video.videoWidth,
         height = video.videoHeight;
@@ -154,54 +160,12 @@ input.addEventListener('change', function(e){
         canvas.width = width;
         canvas.height = height;
         ctx.drawImage(img1, 0, 0, width, height);
+        image.setAttribute('src', canvas.toDataURL('image/png'));
+        image.setAttribute('width', width);
+        image.classList.add("visible");
     }
     reader.onload = function() {
         img1.src = reader.result;
     }
     reader.readAsDataURL(input.files[0]);
 }, false);
-// }) ();
-
-// function capture(data)
-// {
-//     if (data === "capture")
-//     {
-//         ctx.drawImage(video, 0, 0, 400, 300);
-//         document.getElementById('canvas').style = "display:block";
-//         document.getElementById('video').style = "display:none";
-//         document.getElementById("capture").style = "display:none";
-//         document.getElementById('new').style = "display:block";
-//         photo.setAttribute('value', canvas.toDataURL('Image/png'));
-//         document.getElementById('photoform').disabled = false;
-//     }
-//     else if (data === "new")
-//     {
-//         document.getElementById('canvas').style = "display:none";
-//         document.getElementById('video').style = "display:block";
-//         document.getElementById("capture").style = "display:block";
-//         document.getElementById("new").style = "display:none";
-//         document.getElementById("upload").style = "display:none";
-//         document.getElementById('photoform').disabled = true;
-//     }
-//     else if (data === "camera")
-//     {
-//         document.getElementById('camera').style = "display:block";
-//         document.getElementById('cam').style = "display:none";
-//         document.getElementById('upl').style = "display:none";
-//         document.getElementById('photoform').disabled = false;
-//         photo.setAttribute('value', canvas.toDataURL('Image/png'));
-//     }
-//     else if (data === "upload")
-//     {
-//         document.getElementById('camera').style = "display:block";
-//         document.getElementById('canvas').style = "display:block";
-//         document.getElementById('video').style = "display:none";
-//         document.getElementById("capture").style = "display:none";
-//         document.getElementById('new').style = "display:none";
-//         photo.setAttribute('value', canvas.toDataURL('Image/png'));
-//         document.getElementById('photoform').disabled = false;
-//         document.getElementById('upl').style = "display:none";
-//         document.getElementById('cam').style = "display:none";
-//     }
-
-// }
