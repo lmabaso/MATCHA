@@ -4,45 +4,45 @@ if (!$user->isLoggedIn())
 {
     Redirect::to('index.php');
 }
-if (Input::exists())
-{
-    if(Input::get('Delete'))
-    {
-        $pic = new Photo();
-        $pic->delete(array(Input::get('pic_id')));
-    }
-    if (Token::check(Input::get('token')))
-    {
-        $validate = new Validate();
-		$validation = $validate->check($_POST, array(
-			'photo' => array('required' => true)
-        ));
-        if ($validation->passed())
-        {
-            $data = substr(Input::get('photo'), strpos(Input::get('photo'), ",") + 1);
-            $decode = base64_decode($data);
-            $name = "imgs/".Input::get('token')."-".time().".png";
-            $fp = fopen($name, 'wb');
-            if (!fwrite($fp, $decode))
-            {
-				echo "<script>alert('Unable to find image. Please upload/take an image.');</script>";
-            }
-            fclose($fp);
-            $pic = new Photo();
-            $pic->upload(array(
-                'user_id' => escape($user->data()->user_id),
-                'pic_dir' => $name
-            ));
-        }
-        else
-        {
-            foreach ($validation->errors() as $error)
-            {
-				echo $error . '</br>';
-			}
-        }
-    }
-}
+// if (Input::exists())
+// {
+//     if(Input::get('Delete'))
+//     {
+//         $pic = new Photo();
+//         $pic->delete(array(Input::get('pic_id')));
+//     }
+//     if (Token::check(Input::get('token')))
+//     {
+//         $validate = new Validate();
+// 		$validation = $validate->check($_POST, array(
+// 			'photo' => array('required' => true)
+//         ));
+//         if ($validation->passed())
+//         {
+//             $data = substr(Input::get('photo'), strpos(Input::get('photo'), ",") + 1);
+//             $decode = base64_decode($data);
+//             $name = "imgs/".Input::get('token')."-".time().".png";
+//             $fp = fopen($name, 'wb');
+//             if (!fwrite($fp, $decode))
+//             {
+// 				echo "<script>alert('Unable to find image. Please upload/take an image.');</script>";
+//             }
+//             fclose($fp);
+//             $pic = new Photo();
+//             $pic->upload(array(
+//                 'user_id' => escape($user->data()->user_id),
+//                 'pic_dir' => $name
+//             ));
+//         }
+//         else
+//         {
+//             foreach ($validation->errors() as $error)
+//             {
+// 				echo $error . '</br>';
+// 			}
+//         }
+//     }
+// }
 ?>
 <section class="header5 cid-r8wXduSTYD mbr-fullscreen mbr-parallax-background" id="header5-9">
     <div class="mbr-overlay" style="opacity: 0.5; background-color: rgb(255, 127, 159);"></div>
@@ -66,18 +66,19 @@ if (Input::exists())
                     <div id="upload-file-local">
                         <input type="file" id="uploadpic" value="" name="thumb" />
                     </div>
-                    <img id="snap">
+                    <div id="isnap">
+                        <img id="snap">
+                    </div>
+                    <input type="hidden" id="token" name="token" value="<?php echo Token::generate(); ?> ">
                     <p id="error-message"></p>
                     <div class="controls">
                         <a href="#" id="delete-photo" title="Delete Photo" class="disabled"><i class="material-icons">delete</i></a>
                         <a href="#" id="take-photo" title="Take Photo"><i class="material-icons">camera_alt</i></a>
-                        <a href="#" id="save-photo" title="Save Photo" class="disabled"><i class="material-icons">save</i></a>  
+                        <a href="#" id="save-photo" title="Save Photo" class="disabled"><i class="material-icons">save</i></a>
                     </div>
                     <!-- Hidden canvas element. Used for taking snapshot of video. -->
-                    <canvas></canvas>
-                    
+                    <canvas></canvas> 
                 </div>
-
             </div>
         </div>
             <!-- <div>
