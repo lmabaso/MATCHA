@@ -172,7 +172,7 @@ $stuff = DB::getInstance();
                 <form action="" method="POST">
                     <p>Name: <?php echo escape($user->data()->user_name) ?></p>
                     <p>Email: <?php echo escape($user->data()->user_email) ?></p>
-                    <?php echo ($result->results()[0]->user_gender === NULL) ? '<select name="gender_in"  class="form-control" id ="gender" onchange="gender(this.value)"><option value="">Select Gender</option><option value="male">Male</option><option value="female">Female</option></select>' : '<p>Gender: '. escape($result->results()[0]->user_gender) . '</p>';?>
+                    <?php echo ($result->results()[0]->user_gender === NULL) ? '<select name="gender_in"  class="form-control" id ="gender" onchange="gender(this.value)"><option value="">Select Gender</option><option value="bi-sexual">bi-sexual</option><option value="male">Male</option><option value="female">Female</option></select>' : '<p>Gender: '. escape($result->results()[0]->user_gender) . '</p>';?>
                     <div class="mbr-section-btn align-center">
                         <input type="submit" class="btn btn-md" name="gender" value="update"><br/>
                     </div>
