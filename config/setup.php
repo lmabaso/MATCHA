@@ -70,7 +70,7 @@ try
 		id int(11) not null AUTO_INCREMENT PRIMARY KEY,
 		user_id int(11) not null,
 		user_gender varchar(6) null,
-		user_sexual_pref varchar(6) null,
+		user_sexual_pref varchar(11) null,
 		user_biography text null,
 		FOREIGN KEY (user_id) REFERENCES users(user_id)
 	);";
@@ -116,22 +116,22 @@ catch (PDOException $e)
 	$_db = null;
 }
 
-try
-{
-	$_db = DB::getInstance();
-	$sql = "CREATE TABLE pictures (
-		id int(11) not null AUTO_INCREMENT PRIMARY KEY,
-		user_id int(11) not null,
-		pic_dir blob not null
-	);";
-	$_db->query($sql, array());
-	echo "Table pictures create success --- ";
-}
-catch (PDOException $e)
-{
-	echo $e->getMessage();
-	$_db = null;
-}
+// try
+// {
+// 	$_db = DB::getInstance();
+// 	$sql = "CREATE TABLE pictures (
+// 		id int(11) not null AUTO_INCREMENT PRIMARY KEY,
+// 		user_id int(11) not null,
+// 		pic_dir longblob not null
+// 	);";
+// 	$_db->query($sql, array());
+// 	echo "Table pictures create success --- ";
+// }
+// catch (PDOException $e)
+// {
+// 	echo $e->getMessage();
+// 	$_db = null;
+// }
 
 try
 {
@@ -250,7 +250,31 @@ try
 	$profile->insert('userinterests', array('user_id' => 10, 'user_interests' => 'drinking'));
 	echo "Users added --- ";
 }
+catch (PDOException $e)
+{
+	echo $e->getMessage();
+	$_db = null;
+}
 
+try
+{
+	$filename = 'pictures.sql';
+	$_db = DB::getInstance();
+	$lines = file($filename);
+	$templine = '';
+	foreach ($lines as $line)
+	{
+		if (substr($line, 0, 2) == '--' || $line == '')
+		continue;
+		$templine .= $line;
+		if (substr(trim($line), -1, 1) == ';')
+		{
+			$_db->query($templine) or print('Error performing query \'<strong>' . $templine . '\': ' . mysql_error() . '<br /><br />');
+			$templine = '';
+		}
+	}
+	echo "Tables imported successfully";
+}
 catch (PDOException $e)
 {
 	echo $e->getMessage();

@@ -20,12 +20,16 @@ if (Input::exists())
         <div class="card-columns">
             <?php
             $result = $stuff->query("SELECT * FROM users JOIN profiles ON users.user_id=profiles.user_id");
-            // var_dump($result);
+            $stuff2 = DB::getInstance();
+            // $result = $stuff->query("SELECT * FROM pictures");
             $max = count($result->results());
             for ($x = 0; $x < $max; $x++)
             {
+                $result2 = new Photo();
+                $result2->find($result->results()[$x]->user_id);
+                die(var_dump($result2));
                 echo '<div class="card bg-light">';
-                echo '<img class="card-img-top" src="imgs/3a553ccd4606dd06362c389e7fbca1f3 -1542093078.png" alt="Card image" style="width:100%">';
+                echo '<img class="card-img-top" src="data:image/jpeg;base64,' . base64_encode($result2->results()[0]->pic_dir ) . '" alt="Card image" style="height: 50vh">';
                 echo '   <div class="card-body text-center">';
                 echo '      <h4 class="card-title">' . $result->results()[$x]->user_username . '</h4>';
                 echo '      <p class="card-text">' . $result->results()[$x]->user_biography . '</p>';

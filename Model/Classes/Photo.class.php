@@ -3,6 +3,7 @@
 class Photo {
     private $_db;
     private $_data;
+    private $_results;
 
     public function __construct() {
         $this->_db = DB::getInstance();
@@ -24,6 +25,9 @@ class Photo {
         if ($user) {
             $field = (is_numeric($user)) ? 'user_id' : 'user_username';
             $data = $this->_db->get('pictures', array($field, '=', $user));
+            $_results = $_db->query("SELECT * FROM pictures WHERE user_id = ?", array($user))->results();
+
+            die(var_dump($_results));
             if ($data->count()) {
                 $this->_data = $data;    
                 return (true);
@@ -32,6 +36,10 @@ class Photo {
         return (false);
     }
 
+    public function get_pics()
+    {
+        return ($_results);
+    }
     public function data() {
         return ($this->_data);
     }
