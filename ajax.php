@@ -12,7 +12,7 @@ if (Input::get('upload'))
 {
     $data = substr(Input::get('pic_id'), strpos(Input::get('pic_id'), ",") + 1);
     $decode = base64_decode($data);
-    $name = "imgs/".Input::get('token')."-".time().".png";
+    $name = "imgs/" . Input::get('token') . "-" .time() . ".png";
     $fp = fopen($name, 'wb');
     if (!fwrite($fp, $decode))
     {

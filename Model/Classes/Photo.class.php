@@ -24,13 +24,11 @@ class Photo {
     public function find($user = null) {
         if ($user) {
             $field = (is_numeric($user)) ? 'user_id' : 'user_username';
-            $data = $this->_db->get('pictures', array($field, '=', $user));
-            $_results = $_db->query("SELECT * FROM pictures WHERE user_id = ?", array($user))->results();
+            $_results = $this->_db->query("SELECT * FROM pictures WHERE " . $field . " = ?", array($user))->results();
 
-            die(var_dump($_results));
-            if ($data->count()) {
+            if (count($_results)) {
                 $this->_data = $data;    
-                return (true);
+                return ($_results);
             }
         }
         return (false);

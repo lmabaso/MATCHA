@@ -27,9 +27,6 @@ echo '<section class="header5 cid-r8wXduSTYD mbr-fullscreen mbr-parallax-backgro
                     </div>
                 </div>
             </div>
-        </section>
-        <div class="modal fade" id="login" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-       
-        </div>';
+        </section>';
 include_once 'footer.php';
 ?>

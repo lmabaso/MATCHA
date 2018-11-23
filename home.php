@@ -29,7 +29,7 @@ if (Input::exists())
                 $result2->find($result->results()[$x]->user_id);
                 die(var_dump($result2));
                 echo '<div class="card bg-light">';
-                echo '<img class="card-img-top" src="data:image/jpeg;base64,' . base64_encode($result2->results()[0]->pic_dir ) . '" alt="Card image" style="height: 50vh">';
+                // echo '<img class="card-img-top" src="data:image/jpeg;base64,' . base64_encode($result2->results()[0]->pic_dir ) . '" alt="Card image" style="height: 50vh">';
                 echo '   <div class="card-body text-center">';
                 echo '      <h4 class="card-title">' . $result->results()[$x]->user_username . '</h4>';
                 echo '      <p class="card-text">' . $result->results()[$x]->user_biography . '</p>';

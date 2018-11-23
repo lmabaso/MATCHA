@@ -2,5 +2,5 @@
 
 $dbServicename = "localhost";
 $dbUsername = "root";
-$dbPassword = "zxcvb12345";
+$dbPassword = "";
 $dbName = "matcha";
