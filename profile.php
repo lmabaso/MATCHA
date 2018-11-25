@@ -91,7 +91,7 @@ $stuff = DB::getInstance();
                             <?php
                             if (count($res->results()) > 1)
                             {
-                                echo '<img src="' . $res->results()[0]->pic_dir . '" class="img-fluid" alt="Responsive image">';
+                                echo '<img src="data:image/jpeg;base64,' . base64_encode($res->results()[0]->pic_dir) . '" class="img-fluid" alt="Responsive image">';
                             }
                             else 
                             {
@@ -102,58 +102,28 @@ $stuff = DB::getInstance();
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col">
                             <?php
-                            if (count($res->results()) > 2)
+                            $i = 0;
+                            foreach ($res->results() as $pic)
                             {
-                                echo '<img src="' . $res->results()[1]->pic_dir . '" class="rounded float-left img-thumbnail"  alt="...">';
+                                $i++;
+                                if ($i == 1)
+                                    continue;
+                                echo '<div class="col">';
+                                echo '<img src="data:image/jpeg;base64,' . base64_encode($pic->pic_dir) . '" class="rounded float-left img-thumbnail" style="height: 10vh" alt="...">';
+                                echo '</div>';
                             }
-                            else 
+                            if (count($res->results() < 5))
                             {
-                                echo '<img src="imgs/profile.png" class="rounded float-left img-thumbnail"  alt="...">
-                                <a href="createpost.php"><i class="material-icons">add</i></a>';
+                                for ($i = 0; $i < 5 - count($res->results()); $i++)
+                                {
+                                    echo '<div class="col">';
+                                    echo '<img src="imgs/profile.png" class="rounded float-left img-thumbnail"  alt="...">
+                                    <a href="createpost.php"><i class="material-icons">add</i></a>';
+                                    echo '</div>';
+                                }
                             }
                             ?>
-                            </div>
-                            <div class="col">
-                            <?php
-                            if (count($res->results()) > 3)
-                            {
-                                echo '<img src="' . $res->results()[2]->pic_dir . '" class="rounded float-left img-thumbnail"  alt="...">';
-                            }
-                            else 
-                            {
-                                echo '<img src="imgs/profile.png" class="rounded float-left img-thumbnail"  alt="...">
-                                <a href="createpost.php"><i class="material-icons">add</i></a>';
-                            }
-                            ?>
-                            </div>
-                            <div class="col">
-                            <?php
-                            if (count($res->results()) > 4)
-                            {
-                                echo '<img src="' . $res->results()[3]->pic_dir . '" class="rounded float-left img-thumbnail"  alt="...">';
-                            }
-                            else 
-                            {
-                                echo '<img src="imgs/profile.png" class="rounded float-left img-thumbnail"  alt="...">
-                                <a href="createpost.php"><i class="material-icons">add</i></a>';
-                            }
-                            ?>
-                            </div>
-                            <div class="col">
-                            <?php
-                            if (count($res->results()) > 5)
-                            {
-                                echo '<img src="' . $res->results()[4]->pic_dir . '" class="rounded float-left img-thumbnail"  alt="...">';
-                            }
-                            else 
-                            {
-                                echo '<img src="imgs/profile.png" class="rounded float-left img-thumbnail"  alt="...">
-                                <a href="createpost.php"><i class="material-icons">add</i></a>';
-                            }
-                            ?>
-                            </div>
                         </div>
                     </div>
 				</div>

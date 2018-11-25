@@ -24,21 +24,21 @@ class Photo {
     public function find($user = null) {
         if ($user) {
             $field = (is_numeric($user)) ? 'user_id' : 'user_username';
-            $_results = $this->_db->query("SELECT * FROM pictures WHERE " . $field . " = ?", array($user))->results();
-
-            if (count($_results)) {
-                $this->_data = $data;    
-                return ($_results);
+            $data = $this->_db->query('SELECT * FROM pictures WHERE '. $field . '= ?', array($user));
+            if ($data->count()) {
+                $this->_data = $data->first();
+                $this->_results = $data->results();
+                return ($this);
             }
         }
         return (false);
     }
 
-    public function get_pics()
-    {
-        return ($_results);
-    }
     public function data() {
         return ($this->_data);
+    }
+
+    public function results() {
+        return ($this->_results);
     }
 }

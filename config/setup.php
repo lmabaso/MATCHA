@@ -89,7 +89,26 @@ try
 	$sql = "CREATE TABLE userinterests (
 		id int(11) not null AUTO_INCREMENT PRIMARY KEY,
 		user_id int(11) not null,
-		user_interests varchar(255) not null
+		user_interests varchar(255) not null,
+		FOREIGN KEY (user_id) REFERENCES users(user_id)
+	);";
+	$_db->query($sql, array());
+	echo "Table userinterests create success --- ";
+}
+catch (PDOException $e)
+{
+	echo $e->getMessage();
+	$_db = null;
+}
+
+try
+{
+	$_db = DB::getInstance();
+	$sql = "CREATE TABLE friends (
+		id int(11) not null AUTO_INCREMENT PRIMARY KEY,
+		user_id int(11) not null,
+		user_friend int(11) not null,
+		FOREIGN KEY (user_id) REFERENCES users(user_id)
 	);";
 	$_db->query($sql, array());
 	echo "Table userinterests create success --- ";
