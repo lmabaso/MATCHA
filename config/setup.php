@@ -108,6 +108,7 @@ try
 		id int(11) not null AUTO_INCREMENT PRIMARY KEY,
 		user_id int(11) not null,
 		user_friend int(11) not null,
+		status boolean not null DEFAULT '0',
 		FOREIGN KEY (user_id) REFERENCES users(user_id)
 	);";
 	$_db->query($sql, array());

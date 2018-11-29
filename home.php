@@ -19,26 +19,43 @@ if (Input::exists())
     <div class="container-fluid containter"  style="margin-top: 20px;">
         <div class="card-columns">
             <?php
-            $stuff->query("SELECT * FROM users JOIN profiles ON users.user_id=profiles.user_id");
+            $this_user_id = $stuff->results()[0]->user_id;
+            $stuff->query("SELECT * FROM users JOIN profiles ON users.user_id=profiles.user_id WHERE users.user_id = ?", array($this_user_id));
             $sex = $stuff->results()[0]->user_sexual_pref;
-            if ($sex == "women")
+            if ($sex === "women")
             {
                 $sex = "female";
             }
-            else if ($sex == "men")
+            else if ($sex === "men") 
             {
                 $sex = "male";
             }
-            $my_interests = $stuff->query("SELECT * FROM userinterests WHERE user_id = ?", array($stuff->results()[0]->user_id))->results();
-            $str = "SELECT * FROM profiles 
-            JOIN userinterests ON profiles.user_id=userinterests.user_id 
-            JOIN users ON profiles.user_id=users.user_id 
-            WHERE NOT userinterests.user_id = ? 
-            AND profiles.user_gender = ? 
-            AND (";
+            else 
+            {
+                $sex = "bi-sexual";
+            }
+            $my_interests = $stuff->query("SELECT * FROM userinterests WHERE user_id = ?", array($this_user_id))->results();
+            if ($sex != "bi-sexual")
+            {
+                $str = "SELECT * FROM profiles 
+                JOIN userinterests ON profiles.user_id=userinterests.user_id 
+                JOIN users ON profiles.user_id=users.user_id 
+                WHERE NOT userinterests.user_id = ? 
+                AND profiles.user_gender = ? 
+                AND (";
+                $a = array($this_user_id, $sex);
+            }
+            else
+            {
+                $str = "SELECT * FROM profiles 
+                JOIN userinterests ON profiles.user_id=userinterests.user_id 
+                JOIN users ON profiles.user_id=users.user_id 
+                WHERE NOT userinterests.user_id = ? 
+                AND (";
+                $a = array($this_user_id);
+            }
             $x = count($my_interests);
             $i = 0;
-            $a = array($stuff->results()[0]->user_id, $sex);
             foreach ($my_interests as $interests)
             {
                 $str .= "user_interests = ?";
@@ -53,8 +70,13 @@ if (Input::exists())
             $stuff2 = DB::getInstance();
             $result2 = new Photo();
             $max = count($result);
+            $dup = array();
             foreach ($result as $prof)
             {
+                if (in_array($prof->user_id, $dup))
+                    continue ;
+                else
+                    array_push($dup, $prof->user_id);
                 $pics = $result2->find($prof->user_id)->results();
                 echo '<form action="" method="POST">';
                 echo '<div class="card bg-light">';
