@@ -1,17 +1,3 @@
-body {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    min-height: 100vh;
-    background: #27ae60;
-    font-family: "proxima-nova", "Source Sans Pro", sans-serif;
-    font-size: 1em;
-    letter-spacing: 0.1px;
-    color: #32465a;
-    text-rendering: optimizeLegibility;
-    text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.004);
-    -webkit-font-smoothing: antialiased;
-  }
 
   #frame {
     width: 95%;
@@ -34,7 +20,7 @@ body {
     max-width: 340px;
     width: 40%;
     height: 100%;
-    background: #2c3e50;
+    background: rgb(255, 127, 159);
     color: #f5f5f5;
     overflow: hidden;
     position: relative;
@@ -54,7 +40,7 @@ body {
       width: 100%;
       margin: 0 auto;
       padding: 5px 0 0 0;
-      background: #32465a;
+      background: #ff0000;
     }
   }
   #frame #sidepanel #profile.expanded .wrap {
@@ -147,7 +133,7 @@ body {
     border-radius: 6px;
     z-index: 99;
     line-height: initial;
-    background: #435f7a;
+    background: rgb(255, 127, 159);
     -moz-transition: 0.3s all ease;
     -o-transition: 0.3s all ease;
     -webkit-transition: 0.3s all ease;
@@ -176,7 +162,7 @@ body {
     height: 0;
     border-left: 6px solid transparent;
     border-right: 6px solid transparent;
-    border-bottom: 8px solid #435f7a;
+    border-bottom: 8px solid rgb(245, 16, 73);
     margin: -8px 0 0 24px;
   }
   @media screen and (max-width: 735px) {
@@ -199,7 +185,7 @@ body {
     }
   }
   #frame #sidepanel #profile .wrap #status-options ul li:hover {
-    background: #496886;
+    background: rgb(255, 127, 159);
   }
   #frame #sidepanel #profile .wrap #status-options ul li span.status-circle {
     position: absolute;
@@ -276,7 +262,7 @@ body {
   #frame #sidepanel #profile .wrap #expanded input {
     border: none;
     margin-bottom: 6px;
-    background: #32465a;
+    background: #ff0000;
     border-radius: 3px;
     color: #f5f5f5;
     padding: 7px;
@@ -284,11 +270,11 @@ body {
   }
   #frame #sidepanel #profile .wrap #expanded input:focus {
     outline: none;
-    background: #435f7a;
+    background: rgb(255, 127, 159);
   }
   #frame #sidepanel #search {
-    border-top: 1px solid #32465a;
-    border-bottom: 1px solid #32465a;
+    border-top: 1px solid rgb(245, 16, 73);
+    border-bottom: 1px solid rgb(245, 16, 73);
     font-weight: 300;
   }
   @media screen and (max-width: 735px) {
@@ -305,12 +291,12 @@ body {
     padding: 10px 0 10px 46px;
     width: calc(100% - 25px);
     border: none;
-    background: #32465a;
+    background: rgb(255, 127, 159);
     color: #f5f5f5;
   }
   #frame #sidepanel #search input:focus {
     outline: none;
-    background: #435f7a;
+    background: rgb(255, 48, 100);
   }
   #frame #sidepanel #search input::-webkit-input-placeholder {
     color: #f5f5f5;
@@ -344,10 +330,10 @@ body {
   }
   #frame #sidepanel #contacts::-webkit-scrollbar {
     width: 8px;
-    background: #2c3e50;
+    background: rgb(255, 127, 159);
   }
   #frame #sidepanel #contacts::-webkit-scrollbar-thumb {
-    background-color: #243140;
+    background-color: rgb(255, 127, 159);
   }
   #frame #sidepanel #contacts ul li.contact {
     position: relative;
@@ -361,14 +347,14 @@ body {
     }
   }
   #frame #sidepanel #contacts ul li.contact:hover {
-    background: #32465a;
+    background: rgb(245, 16, 73);
   }
   #frame #sidepanel #contacts ul li.contact.active {
-    background: #32465a;
-    border-right: 5px solid #435f7a;
+    background: rgb(245, 16, 73);
+    border-right: 5px solid rgb(245, 16, 73);
   }
   #frame #sidepanel #contacts ul li.contact.active span.contact-status {
-    border: 2px solid #32465a !important;
+    border: 2px solid rgb(245, 16, 73) !important;
   }
   #frame #sidepanel #contacts ul li.contact .wrap {
     width: 88%;
@@ -387,8 +373,8 @@ body {
     width: 10px;
     height: 10px;
     border-radius: 50%;
-    border: 2px solid #2c3e50;
-    background: #95a5a6;
+    border: 2px solid #ff2020;
+    background: #a69595;
   }
   #frame #sidepanel #contacts ul li.contact .wrap span.online {
     background: #2ecc71;
@@ -452,7 +438,7 @@ body {
     border: none;
     width: 50%;
     padding: 10px 0;
-    background: #32465a;
+    background: rgb(245, 16, 73);
     color: #f5f5f5;
     cursor: pointer;
     font-size: 0.85em;
@@ -478,7 +464,7 @@ body {
     }
   }
   #frame #sidepanel #bottom-bar button:hover {
-    background: #435f7a;
+    background: rgb(245, 16, 73);
   }
   #frame #sidepanel #bottom-bar button i {
     margin-right: 3px;
@@ -574,7 +560,7 @@ body {
     margin: 6px 8px 0 0;
   }
   #frame .content .messages ul li.sent p {
-    background: #435f7a;
+    background: rgb(245, 16, 73);
     color: #f5f5f5;
   }
   #frame .content .messages ul li.replies img {
@@ -618,7 +604,7 @@ body {
     width: calc(100% - 90px);
     padding: 11px 32px 10px 8px;
     font-size: 0.8em;
-    color: #32465a;
+    color: #5a3232;
   }
   @media screen and (max-width: 735px) {
     #frame .content .message-input .wrap input {
@@ -634,7 +620,7 @@ body {
     z-index: 4;
     margin-top: 10px;
     font-size: 1.1em;
-    color: #435f7a;
+    color: #7a4343;
     opacity: .5;
     cursor: pointer;
   }
@@ -653,7 +639,7 @@ body {
     width: 50px;
     padding: 12px 0;
     cursor: pointer;
-    background: #32465a;
+    background: rgb(235, 115, 145);
     color: #f5f5f5;
   }
   @media screen and (max-width: 735px) {
@@ -662,7 +648,7 @@ body {
     }
   }
   #frame .content .message-input .wrap button:hover {
-    background: #435f7a;
+    background: rgb(245, 16, 73);
   }
   #frame .content .message-input .wrap button:focus {
     outline: none;

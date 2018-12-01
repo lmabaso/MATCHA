@@ -301,4 +301,27 @@ catch (PDOException $e)
 	$_db = null;
 }
 
+
+try
+{
+	$_db = DB::getInstance();
+	$sql = "SELECT * FROM userinterests";
+	$results = $_db->query($sql, array())->results();
+	foreach ($results as $val)
+	{
+		$sql = "SELECT * FROM interests WHERE user_interests = ?";
+		$results2 = $_db->query($sql, array($val->user_interests))->results();
+		if (count($results2) == 0)
+		{
+		var_dump($results2);
+			$_db->insert('interests', array('user_interests' => $val->user_interests));
+		}
+	}
+	echo "Table interests create success --- ";
+}
+catch (PDOException $e)
+{
+	echo $e->getMessage();
+	$_db = null;
+}
 ?>

@@ -23,17 +23,11 @@ if (Input::exists())
             $stuff->query("SELECT * FROM users JOIN profiles ON users.user_id=profiles.user_id WHERE users.user_id = ?", array($this_user_id));
             $sex = $stuff->results()[0]->user_sexual_pref;
             if ($sex === "women")
-            {
                 $sex = "female";
-            }
-            else if ($sex === "men") 
-            {
+            else if ($sex === "men")
                 $sex = "male";
-            }
             else 
-            {
                 $sex = "bi-sexual";
-            }
             $my_interests = $stuff->query("SELECT * FROM userinterests WHERE user_id = ?", array($this_user_id))->results();
             if ($sex != "bi-sexual")
             {
@@ -80,6 +74,7 @@ if (Input::exists())
                 $pics = $result2->find($prof->user_id)->results();
                 echo '<form action="" method="POST">';
                 echo '<div class="card bg-light">';
+                echo '<input type=hidden name=userid value=' . $prof->user_id . '>';
                 echo '<img class="card-img-top" src="data:image/jpeg;base64,' . base64_encode($pics[0]->pic_dir) . '" alt="Card image" style="height: 50vh">';
                 echo '   <div class="card-body text-center">';
                 echo '      <h4 class="card-title">' . $prof->user_username . '</h4>';
