@@ -69,8 +69,26 @@ echo '						</div>';
 echo '					</div>';
 echo '				</nav>';
 echo '			</section>';
-if (!$user->isLoggedIn())
+if ($user->isLoggedIn())
 {
+?>
+<script>
+	setInterval(function(){
+		update_last_activity();
+	}, 5000);
 
+    function update_last_activity()
+    {
+        $.ajax({
+            url: "update_last_activity.php",
+            success: function()
+            {
+
+            }
+        })
+    }
+</script>
+<?php
 }
 ?>
+
