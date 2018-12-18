@@ -17,16 +17,16 @@ $this_user_name = $stuff->results()[0]->user_username;
 $result2 = new Photo();
 $pics = $result2->find($this_user_id)->results();
 echo '<section class="header5 cid-r8wXduSTYD mbr-fullscreen mbr-parallax-background" id="header5-9">';
-echo '<div class="mbr-overlay" style="opacity: 0.5; background-color: rgb(255, 127, 159);"></div>';
-echo '<div class="content w-100 align-center">';
-echo '<div id="frame">';
-echo '  <div id="sidepanel">';
-echo '    <div id="profile">';
-echo '      <div class="wrap">';
-echo '        <img id="profile-img" src="data:image/jpeg;base64,' . base64_encode($pics[0]->pic_dir) . '" class="online" alt="" />';
-echo '        <p>' . $this_user_name . '</p>';
+// echo '<div class="mbr-overlay" style="opacity: 0.5; background-color: rgb(255, 127, 159);"></div>';
+// echo '<div class="content w-100 align-center">';
+// echo '<div id="frame">';
+// echo '  <div id="sidepanel">';
+// echo '    <div id="profile">';
+// echo '      <div class="wrap">';
+// echo '        <img id="profile-img" src="data:image/jpeg;base64,' . base64_encode($pics[0]->pic_dir) . '" class="online" alt="" />';
+// echo '        <p>' . $this_user_name . '</p>';
 ?>
-				<div id="status-options">
+				<!-- <div id="status-options">
 					<ul>
 						<li id="status-online" class="active"><span class="status-circle"></span> <p>Online</p></li>
 						<li id="status-away"><span class="status-circle"></span> <p>Away</p></li>
@@ -40,41 +40,16 @@ echo '        <p>' . $this_user_name . '</p>';
 			<label for=""><i class="fa fa-search" aria-hidden="true"></i></label>
 			<input type="text" placeholder="Search contacts..." />
 		</div>
-		<div id="contacts">
-			<ul>
-				<li class="contact active">
-					<div class="wrap">
-						<span class="contact-status online"></span>
-						<img src="http://emilcarlsson.se/assets/louislitt.png" alt="" />
-						<div class="meta">
-							<p class="name">Louis Litt</p>
-							<p class="preview">You just got LITT up, Mike.</p>
-						</div>
-					</div>
-				</li>
-				<li class="contact">
-					<div class="wrap">
-						<span class="contact-status busy"></span>
-						<img src="http://emilcarlsson.se/assets/harveyspecter.png" alt="" />
-						<div class="meta">
-							<p class="name">Harvey Specter</p>
-							<p class="preview">Wrong. You take the gun, or you pull out a bigger one. Or, you call their bluff. Or, you do any one of a hundred and forty six other things.</p>
-						</div>
-					</div>
-				</li>
-			</ul>
-		</div>
-		<div id="bottom-bar">
-		</div>
-	</div>
+		<div id="contacts"></div>
+	</div> -->
 <?php
-	echo '<div class="content">';
-	echo '	<div class="contact-profile">';
-	echo '		<img src="data:image/jpeg;base64,' . base64_encode($pics[0]->pic_dir) . '"  alt="" />';
-	echo '		<p>Harvey Specter</p>';		
-	echo '	</div>';	
+	// echo '<div class="content">';
+	// echo '	<div class="contact-profile">';
+	// echo '		<img src="data:image/jpeg;base64,' . base64_encode($pics[0]->pic_dir) . '"  alt="" />';
+	// echo '		<p>Harvey Specter</p>';
+	// echo '	</div>';
 ?>
-		<div class="messages">
+		<!-- <div class="messages">
 			<ul>
 				<li class="sent">
 					<img src="http://emilcarlsson.se/assets/mikeross.png" alt="" />
@@ -118,11 +93,48 @@ echo '        <p>' . $this_user_name . '</p>';
 			</div>
 		</div>
 	</div>
-</div>
-<script src='//production-assets.codepen.io/assets/common/stopExecutionOnTimeout-b2a7b3fe212eaa732349046d8416e00a9dec26eb7fd347590fbced3ab38af52e.js'></script>
+</div>-->
+
+<!-- <script src='//production-assets.codepen.io/assets/common/stopExecutionOnTimeout-b2a7b3fe212eaa732349046d8416e00a9dec26eb7fd347590fbced3ab38af52e.js'></script>
 <script src='https://code.jquery.com/jquery-2.2.4.min.js'></script>
 <script src='js/chat.js'></script>
+</div> -->
+
+<div style="width:100%;">
+	<div style="margin: 0 auto; background-color: pink; width: 80%; height: 90vh">
+		<div style="height: 100%; float: left; width: 20%; background-color: white">
+			<div style="display:flex">
+				<div><img id="profile-img" src="<?php echo 'data:image/jpeg;base64,' . base64_encode($pics[0]->pic_dir) ?>" style=" width: 50px; height: 50px; object-fit:cover;" /></div>
+				<div><p><?php echo $this_user_name ?></p></div>
+			</div>
+			<div id="contacts" style=" margin-top: 10px; height:calc(100% -  50px - 10px);width:100%;overflow:scroll;overflow-x:hidden;overflow-y:scroll;"></div>
+		</div>
+		<div>
+			<div style="background-color: gray; height: 50px"><p><?php echo $this_user_name ?></p><div>
+			<div id="contacts" style="margin-top: 26px; height: calc(90vh - 50px - 30px);overflow:scroll;overflow-x:hidden;overflow-y:scroll;"></div>
+			<div style="position: relative; width: 100%;" ><input type="text" style="border:none; width:calc(80% - 50px); height: 30px; outline: none;"><button style="border:none; height: 30px; outline: none;">send</button></div>
+		</div>
+	</div>
 </div>
+<script>
+$(document).ready(function(){
+
+	setInterval(function(){
+		fetch_user();
+	}, 5000);
+	function fetch_user()
+	{
+		$.ajax({
+			url:"fetch_user.php",
+			method: "POST",
+			success: function(data){
+				$('#contacts').html(data);
+
+			}
+		})
+	}
+});
+</script>
 </section>
 <?php
 include_once 'footer.php';
