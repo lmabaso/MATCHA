@@ -243,10 +243,10 @@
     border: 1px solid #e74c3c;
   }
   #frame #sidepanel #profile .wrap #status-options ul li#status-offline span.status-circle {
-    background: #95a5a6;
+    background: black;
   }
   #frame #sidepanel #profile .wrap #status-options ul li#status-offline.active span.status-circle:before {
-    border: 1px solid #95a5a6;
+    border: none;
   }
   #frame #sidepanel #profile .wrap #expanded {
     padding: 100px 0 0 0;
