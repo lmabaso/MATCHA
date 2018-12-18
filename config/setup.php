@@ -3,7 +3,7 @@
 include_once 'database.php';
 require_once 'Core/init.php';
 
-try 
+try
 {
 	$_db = new PDO("mysql:host=". Config::get('mysql/host'), Config::get('mysql/username'), Config::get('mysql/password'));
 	$_db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
@@ -52,7 +52,8 @@ try
 		user_notification boolean not null DEFAULT '1',
 		user_fisrt_login boolean not null DEFAULT '1',
 		user_pos_lon varchar(256) null,
-		user_pos_lat varchar(256) null
+		user_pos_lat varchar(256) null,
+		last_activity datetime(6)
 		);";
 	$_db->query($sql, array());
 	echo "Table users create success --- ";
