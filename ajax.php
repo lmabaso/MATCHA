@@ -34,4 +34,9 @@ if (Input::get('add_interest'))
         $data->insert('userinterests', array('user_id' => $user->data()->user_id, 'user_interests' => Input::get('interest')));
     }
 }
+
+if(Input::get('chat_input'))
+{
+
+}
 ?>
