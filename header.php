@@ -75,7 +75,7 @@ if ($user->isLoggedIn())
 <script>
 	setInterval(function(){
 		update_last_activity();
-	}, 5000);
+	}, 30000);
 
     function update_last_activity()
     {
