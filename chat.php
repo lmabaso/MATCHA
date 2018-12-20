@@ -102,38 +102,48 @@ echo '<section class="header5 cid-r8wXduSTYD mbr-fullscreen mbr-parallax-backgro
 
 <div style="width:100%;">
 	<div style="margin: 0 auto; background-color: pink; width: 80%; height: 90vh">
-		<div style="height: 100%; float: left; width: 20%; background-color: white">
+		<div style="height: 100%; float: left; width: 300px; background-color: white">
 			<div style="display:flex">
 				<div><img id="profile-img" src="<?php echo 'data:image/jpeg;base64,' . base64_encode($pics[0]->pic_dir) ?>" style=" width: 50px; height: 50px; object-fit:cover;" /></div>
 				<div><p><?php echo $this_user_name ?></p></div>
 			</div>
 			<div id="contacts" style=" margin-top: 10px; height:calc(100% -  50px - 10px);width:100%;overflow:scroll;overflow-x:hidden;overflow-y:scroll;"></div>
 		</div>
-		<div>
-			<div style="background-color: gray; height: 50px"><p><?php echo $this_user_name ?></p><div>
+		<div id="chats">
+			<div style="background-color: gray; height: 50px"><p><?php echo $this_user_name ?></p><label></label><div>
 			<div id="contacts" style="margin-top: 26px; height: calc(90vh - 50px - 30px);overflow:scroll;overflow-x:hidden;overflow-y:scroll;"></div>
-			<div style="position: relative; width: 100%;" ><input type="text" style="border:none; width:calc(80% - 50px); height: 30px; outline: none;"><button style="border:none; height: 30px; outline: none;">send</button></div>
+			<div style="position: relative; width: 100%;" ><input type="text" style="border:none; width:calc(100% - 350px); height: 30px; outline: none;"><button style="border:none; height: 30px; width: 50px; outline: none;">send</button></div>
 		</div>
 	</div>
 </div>
 <script>
-$(document).ready(function(){
-
-	setInterval(function(){
+	$(document).ready(function(){
 		fetch_user();
-	}, 5000);
-	function fetch_user()
-	{
+		setInterval(function(){
+			fetch_user();
+		}, 10000);
+		function fetch_user()
+		{
+			$.ajax({
+				url:"fetch_user.php",
+				method: "POST",
+				success: function(data){
+					$('#contacts').html(data);
+				}
+			})
+		}
+	});
+	function myselect(dat) {
 		$.ajax({
-			url:"fetch_user.php",
-			method: "POST",
-			success: function(data){
-				$('#contacts').html(data);
-
-			}
-		})
+				url:"user_chat.php",
+				method: "POST",
+				data:  {in: dat},
+				success: function(data){
+					alert("liberty");
+					// $('#chats').html(data);
+				}
+			})
 	}
-});
 </script>
 </section>
 <?php
