@@ -7,7 +7,7 @@ add_interest_btn.addEventListener('click', function(e)
         url: "ajax.php",
         type: "POST",
         data:  {add_interest: 'true', interest: document.getElementById('interests').value},
-        success: function (response) {        
+        success: function (response) {
             alert("suceessfully added")
             location.reload();
         }
